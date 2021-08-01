@@ -1,6 +1,9 @@
 package com.example.myschool
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -11,7 +14,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.example.myschool.databinding.ActivityMenuBinding
+import com.example.myschool.ui.timetable.SectionsPagerAdapter
+import com.google.android.material.tabs.TabLayout
 
 class MenuActivity : AppCompatActivity() {
 
@@ -20,7 +26,6 @@ class MenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMenu.toolbar)
@@ -37,6 +42,11 @@ class MenuActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+      /*  val sectionsPagerAdapter = SectionsPagerAdapter(this,supportFragmentManager)
+        val viewPager: ViewPager = findViewById(R.id.view_pager)
+        viewPager.adapter = sectionsPagerAdapter
+        val tabs: TabLayout = findViewById(R.id.tabs)
+        tabs.setupWithViewPager(viewPager)*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

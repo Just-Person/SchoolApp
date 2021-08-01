@@ -13,11 +13,13 @@
         <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/app_bar_menu.xml" value="0.10822401614530777" />
         <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/content_menu.xml" value="0.1" />
         <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/fragment_gallery.xml" value="0.10822401614530777" />
-        <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/fragment_home.xml" value="0.10822401614530777" />
+        <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/fragment_slideshow.xml" value="0.10822401614530777" />
+        <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/fragment_timetable_navigation.xml" value="0.10822401614530777" />
         <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/nav_header_menu.xml" value="0.10822401614530777" />
         <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/layout/texttab.xml" value="0.10822401614530777" />
         <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/menu/activity_main_drawer.xml" value="0.21910112359550563" />
+        <entry key="..\:/Android/AndroidProjects/MySchool/app/src/main/res/menu/menu.xml" value="0.19074074074074074" />
       </map>
     </option>
   </component>
