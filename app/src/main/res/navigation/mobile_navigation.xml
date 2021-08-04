@@ -11,17 +11,78 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
 
+        <action
+            android:id="@+id/action_nav_home_to_nav_gallery"
+            app:destination="@id/nav_gallery"
+            />
+        <action
+            android:id="@+id/action_nav_home_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+        <argument
+            android:name="home1"
+            app:argType="string"
+            android:defaultValue="home" />
+        <action
+            android:id="@+id/action_nav_home_self"
+            app:destination="@id/nav_home" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.myschool.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_gallery_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+        <action
+            android:id="@+id/action_nav_gallery_to_nav_home"
+            app:destination="@id/nav_home" />
+        <argument
+            android:name="gallery1"
+            app:argType="string"
+            android:defaultValue="gallery" />
+        <action
+            android:id="@+id/action_nav_gallery_self"
+            app:destination="@id/nav_gallery" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.myschool.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_nav_gallery"
+            app:destination="@id/nav_gallery" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_nav_home"
+            app:destination="@id/nav_home" />
+        <argument
+            android:name="slideshow1"
+            app:argType="string"
+            android:defaultValue="slideshow" />
+        <action
+            android:id="@+id/action_nav_slideshow_self"
+            app:destination="@id/nav_slideshow" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_nav_home"
+        app:destination="@id/nav_home"
+        />
+    <argument
+        android:name="home"
+        app:argType="string"
+        android:defaultValue="HEllO"/>
+    <argument
+        android:name="gallery"
+        app:argType="string"
+        android:defaultValue="HEllo"/>
+    <argument
+        android:name="slideshow"
+        app:argType="string"
+        android:defaultValue="HEllo"/>
+    <action
+        android:id="@+id/action_global_nav_gallery"
+        app:destination="@id/nav_gallery" />
 </navigation>

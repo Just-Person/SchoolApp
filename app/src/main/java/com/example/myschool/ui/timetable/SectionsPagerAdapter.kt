@@ -17,7 +17,11 @@ import com.example.myschool.ui.home.HomeFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.Понедельник,
-    R.string.Вторник
+    R.string.Вторник,
+    R.string.Среда,
+    R.string.Четверг,
+    R.string.Пятница,
+    R.string.Суббота
 )
 
 /**
