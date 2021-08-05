@@ -1,5 +1,6 @@
 package com.example.myschool
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -14,7 +15,6 @@ import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -24,14 +24,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.*
 import androidx.viewpager.widget.ViewPager
 import com.example.myschool.databinding.ActivityMenuBinding
 import com.example.myschool.ui.gallery.GalleryFragment
 import com.example.myschool.ui.home.HomeFragment
 import com.example.myschool.ui.timetable.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
-import androidx.navigation.NavArgument
+import androidx.navigation.fragment.NavHostFragment
+import com.example.myschool.ui.gallery.GalleryFragmentArgs
 import com.example.myschool.ui.gallery.GalleryFragmentDirections
+import com.example.myschool.ui.home.HomeFragmentArgs
 import com.example.myschool.ui.home.HomeFragmentDirections
 import com.example.myschool.ui.slideshow.SlideshowFragment
 
@@ -41,13 +44,16 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: ActivityMenuBinding
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMenu.toolbar)
         val bundle = Bundle()
-        bundle.putString("home", "From Activity")
+        bundle.putString("gallery1", "Programming")
         val home = HomeFragment()
         val gallery = GalleryFragment()
         // val action =
@@ -64,16 +70,67 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navGraph.addArgument("home1", nameArg);
         navGraph.addArgument("gallery1", nameArg);
         navGraph.addArgument("slideshow1", nameArg);
-        println(navGraph.arguments)
+        println(navGraph.arguments.values)
         //  navGraph.addArgument("gallery", nameArg1);
         navController.graph = navGraph;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
             ), drawerLayout
         )
+        val bundle1: Bundle = Bundle()
+        bundle1.putString("home1","Programming")
+        val homeFragment = HomeFragment()
+        homeFragment.arguments = bundle1
+navController.addOnDestinationChangedListener { controller, destination, arguments ->
+
+
+    navController.graph.findNode(R.id.nav_home)?.addArgument(
+        "home1", NavArgument.Builder()
+            .setDefaultValue("Programming")
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_gallery)?.addArgument(
+        "gallery1", NavArgument.Builder()
+            .setDefaultValue("Programming")
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_slideshow)?.addArgument(
+        "slideshow1", NavArgument.Builder()
+            .setDefaultValue("Programming")
+            .build()
+    )
+
+
+}
+
+        /*when (destination.id){
+            R.id.nav_home->{
+
+                navController.graph.findNode(R.id.nav_home)?.addArgument(
+                    "home1", NavArgument.Builder()
+                        .setDefaultValue("Programming")
+                        .build()
+                )
+            }
+            R.id.nav_gallery->{
+
+                navController.graph.findNode(R.id.nav_home)?.addArgument(
+                    "gallery1", NavArgument.Builder()
+                        .setDefaultValue("Programming")
+                        .build()
+                )
+
+            }
+            R.id.nav_slideshow->{
+
+                //navGraph.addArgument("slideshow1", nameArg);
+                arguments?.putString("slideshow1","Programming")
+            }
+        }*/
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

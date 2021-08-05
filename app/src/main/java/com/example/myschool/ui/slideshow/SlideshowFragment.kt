@@ -31,14 +31,15 @@ class SlideshowFragment : Fragment() {
     ): View? {
         slideshowViewModel =
             ViewModelProvider(this).get(SlideshowViewModel::class.java)
-        val strtext = arguments?.getString("slideshow1")
+        val strtext = this.arguments?.getString("slideshow1")
+
         val actiontohome = SlideshowFragmentDirections.actionNavSlideshowToNavHome(strtext!!)
      //   val actiontogallery = SlideshowFragmentDirections.actionNavSlideshowToNavGallery(strtext!!)
-        actiontohome.arguments.putString("home1",strtext)
+       // actiontohome.arguments.putString("home1",strtext)
       //  actiontogallery.arguments.putString("gallery1",strtext)
         _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        println("SlideshowFragment" + strtext)
+        println("SlideshowFragment  " + strtext)
         val textView: TextView = binding.textSlideshow
         slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

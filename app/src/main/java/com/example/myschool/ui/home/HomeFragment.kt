@@ -42,7 +42,6 @@ import java.util.ResourceBundle.getBundle
 
 class HomeFragment : Fragment(){
     private var vstup: String? = null
-    private var savedState: Bundle? = null
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
@@ -57,14 +56,13 @@ class HomeFragment : Fragment(){
     ): View? {
         Log.e(TAG, "Hello! HomeFragment is activated")
         vstup = this.arguments?.getString("home1")
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+
 
 
         val bundle = Bundle()
         val galleryFragment= GalleryFragment()
-       bundle.putString("gallery1","Программирование")
-        galleryFragment.arguments = bundle
+       //bundle.putString("gallery1","Программирование")
+       // galleryFragment.arguments = bundle
        //val actiontogallery = HomeFragmentDirections.actionNavHomeToNavGallery("Программирование")
         //val actiontoslideshow = HomeFragmentDirections.actionNavHomeToNavSlideshow(strtext!!)
       //  galleryFragment.arguments = HomeFragmentArgs.fromBundle(requireArguments()).toBundle()
@@ -72,16 +70,16 @@ class HomeFragment : Fragment(){
         //GalleryFragmentArgs.fromBundle(requireArguments()).toBundle().putAll(bundle)
 
 
-        println("Gallery "  + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
+        //println("Gallery "  + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
 
 
-        Log.e(TAG,"HomeGallery "  + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
+        //Log.e(TAG,"HomeGallery "  + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
         //actiontoslideshow.arguments.putString("slideshow1",strtext)
      val nameArg = NavArgument.Builder().setDefaultValue("Программирование").build()
         val navController = findNavController()
         val navInflater = navController.navInflater
         val navGraph = navInflater.inflate(com.example.myschool.R.navigation.mobile_navigation)
-     //   actiontogallery.arguments.putAll(bundle)
+     /*  actiontogallery.arguments.putAll(bundle)
        // findNavController().createDeepLink().setArguments(bundle)
       //  findNavController().graph.addArgument("home1",nameArg)
        // findNavController().graph.addArgument("gallery1", nameArg);
@@ -157,8 +155,7 @@ class HomeFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
-        vstup = this.arguments?.getString("home1")
-        Log.e(TAG,"HomeResumed " + vstup)
+
     }
 
     override fun onDestroyView() {
