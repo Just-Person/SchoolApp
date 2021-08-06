@@ -1,5 +1,6 @@
 package com.example.myschool.ui.gallery
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.TextView
 import androidx.core.app.Person.fromBundle
 import androidx.core.os.bundleOf
@@ -28,25 +31,27 @@ import com.example.myschool.ui.home.HomeFragmentDirections
 class GalleryFragment : Fragment() {
 
     private var _binding: FragmentGalleryBinding? = null
-var strfromhome: String? = String()
     private val binding get() = _binding!!
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-var lock = this.requireArguments().getString("gallery2")
-        strfromhome = HomeFragmentArgs.fromBundle(requireArguments()).home1
-        println("GalleryFragment strfromhome "+ lock)
-        println("Home "+HomeFragmentArgs.fromBundle(requireArguments()).home1)
+        var subjlist = this.requireArguments().getStringArrayList("teachersthings")
+        var teachlist = this.requireArguments().getStringArrayList("teachersname")
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val subjects: ListView = binding.subj
+        val teachers: ListView = binding.teach
+        val subjadapter = this.context?.let { ArrayAdapter<String>(it,
+            android.R.layout.simple_list_item_1,subjlist!!) }
 
-        println("GalleryFragment args " + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
-        val textView: TextView = binding.textGallery
-
-        textView.text = lock;
+        subjects.adapter = subjadapter
+        val teachadapter = this.context?.let { ArrayAdapter<String>(it,
+            android.R.layout.simple_list_item_1,teachlist!!) }
+        teachers.adapter = teachadapter
         return root
     }
 

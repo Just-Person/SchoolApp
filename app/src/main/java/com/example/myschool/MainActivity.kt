@@ -67,14 +67,22 @@ private fun showData(dataSnapshot: DataSnapshot) {
             uInfo.setLetter(
                 dataSnapshot.child("Users").child(userID)
                     .getValue(User::class.java)?.getLetter()) //set the letter
+            uInfo.setName(
+                dataSnapshot.child("Users").child(userID)
+                    .getValue(User::class.java)?.getName())
+            uInfo.setSurname(
+                dataSnapshot.child("Users").child(userID)
+                    .getValue(User::class.java)?.getSurname())
             val monday = ArrayList<String>()
             val tuesday = ArrayList<String>()
             val wednesday = ArrayList<String>()
             val thursday = ArrayList<String>()
             val friday = ArrayList<String>()
             val saturday = ArrayList<String>()
-            //val teachers = dataSnapshot.child("Учителя").child("1").child("А").value
-            //Log.e(TAG,teachers.toString())
+            val teachers = uInfo.getteach()
+            val teachersname = ArrayList<String>()
+            val marks = ArrayList<String>()
+            val NAME = uInfo.getSurname()+ " "+uInfo.getName()
             for (i in 1..8)
             {
                 monday.add(
@@ -120,7 +128,17 @@ private fun showData(dataSnapshot: DataSnapshot) {
                             String::class.java
                         )!!)
             }
-
+for (i in 1..teachers!!.size)
+{
+    teachersname.add(dataSnapshot.child("Учителя").child(uInfo.getKl()!!).child(uInfo.getLetter()!!).child(teachers[i-1]).getValue(
+        String::class.java
+    )!!)
+    marks.add(dataSnapshot.child("Оценки").child(teachers[i-1]).child(uInfo.getKl()!!).child(uInfo.getLetter()!!)
+        .child(NAME)
+        .getValue(
+            String::class.java
+        )!!)
+}
 
 intent = Intent(this, MenuActivity::class.java)
             intent.putExtra("userID",userID)
@@ -130,6 +148,9 @@ intent = Intent(this, MenuActivity::class.java)
             intent.putExtra("thursday",thursday)
             intent.putExtra("friday",friday)
             intent.putExtra("saturday",saturday)
+            intent.putExtra("teachersthings",teachers)
+            intent.putExtra("teachersname",teachersname)
+            intent.putExtra("marks",marks)
             startActivity(intent)
         } else
     {

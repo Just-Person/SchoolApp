@@ -63,6 +63,9 @@ class MenuActivity : AppCompatActivity() {
         val thursday = intent.extras?.getStringArrayList("thursday")
         val friday = intent.extras?.getStringArrayList("friday")
         val saturday = intent.extras?.getStringArrayList("saturday")
+        val teachersthings = intent.extras?.getStringArrayList("teachersthings")
+        val teachersname = intent.extras?.getStringArrayList("teachersname")
+        val marks = intent.extras?.getStringArrayList("marks")
         val nameArgmonday = NavArgument.Builder().setDefaultValue(monday).build()
         val nameArgtuesday = NavArgument.Builder().setDefaultValue(tuesday).build()
         val nameArgwednesday = NavArgument.Builder().setDefaultValue(wednesday).build()
@@ -119,16 +122,25 @@ navController.addOnDestinationChangedListener { controller, destination, argumen
             .build()
     )
     navController.graph.findNode(R.id.nav_gallery)?.addArgument(
-        "gallery2", NavArgument.Builder()
-            .setDefaultValue("Programming")
+        "teachersthings", NavArgument.Builder()
+            .setDefaultValue(teachersthings)
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_gallery)?.addArgument(
+        "teachersname", NavArgument.Builder()
+            .setDefaultValue(teachersname)
             .build()
     )
     navController.graph.findNode(R.id.nav_slideshow)?.addArgument(
-        "slideshow1", NavArgument.Builder()
-            .setDefaultValue("Programming")
+        "teachersthings", NavArgument.Builder()
+            .setDefaultValue(teachersthings)
             .build()
     )
-
+    navController.graph.findNode(R.id.nav_slideshow)?.addArgument(
+        "marks", NavArgument.Builder()
+            .setDefaultValue(marks)
+            .build()
+    )
 
 }
 
