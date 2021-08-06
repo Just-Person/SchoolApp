@@ -41,8 +41,12 @@ import java.util.ResourceBundle.getBundle
 
 
 class HomeFragment : Fragment(){
-    private var vstup: String? = null
-    private lateinit var homeViewModel: HomeViewModel
+    private var monday: ArrayList<String>? = null
+    private var tuesday: ArrayList<String>? = null
+    private var wednesday: ArrayList<String>? = null
+    private var thursday: ArrayList<String>? = null
+    private var friday: ArrayList<String>? = null
+    private var saturday: ArrayList<String>? = null
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -55,108 +59,47 @@ class HomeFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         Log.e(TAG, "Hello! HomeFragment is activated")
-        vstup = this.arguments?.getString("home1")
-
-
-
-        val bundle = Bundle()
-        val galleryFragment= GalleryFragment()
-       //bundle.putString("gallery1","Программирование")
-       // galleryFragment.arguments = bundle
-       //val actiontogallery = HomeFragmentDirections.actionNavHomeToNavGallery("Программирование")
-        //val actiontoslideshow = HomeFragmentDirections.actionNavHomeToNavSlideshow(strtext!!)
-      //  galleryFragment.arguments = HomeFragmentArgs.fromBundle(requireArguments()).toBundle()
-       //actiontogallery.arguments.putString("gallery1","Программирование")
-        //GalleryFragmentArgs.fromBundle(requireArguments()).toBundle().putAll(bundle)
-
-
-        //println("Gallery "  + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
-
-
-        //Log.e(TAG,"HomeGallery "  + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
-        //actiontoslideshow.arguments.putString("slideshow1",strtext)
-     val nameArg = NavArgument.Builder().setDefaultValue("Программирование").build()
-        val navController = findNavController()
-        val navInflater = navController.navInflater
-        val navGraph = navInflater.inflate(com.example.myschool.R.navigation.mobile_navigation)
-     /*  actiontogallery.arguments.putAll(bundle)
-       // findNavController().createDeepLink().setArguments(bundle)
-      //  findNavController().graph.addArgument("home1",nameArg)
-       // findNavController().graph.addArgument("gallery1", nameArg);
-       // navGraph.addArgument("slideshow1", nameArg);
-        // findNavController().navigate(actiontogallery)
-      //  Toast.makeText(this.requireContext(),strtext.toString(), Toast.LENGTH_SHORT).show()*/
-        println("HomeFragment " + vstup)
-        println("HomeFragment args " + HomeFragmentArgs.fromBundle(requireArguments()).home1)
-        //findNavController().graph = navGraph
-        //println(actiontogallery.arguments)
+        monday = this.arguments?.getStringArrayList("monday")
+        tuesday = this.arguments?.getStringArrayList("tuesday")
+        wednesday = this.arguments?.getStringArrayList("wednesday")
+        thursday = this.arguments?.getStringArrayList("thursday")
+        friday = this.arguments?.getStringArrayList("friday")
+        saturday = this.arguments?.getStringArrayList("saturday")
+        println("HomeFragment " + monday)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val viewPager: ViewPager = binding.viewPager
-            //findViewById(R.id.view_pager)
         val tabs: TabLayout =binding.tabs
-            //findViewById(R.id.tabs)
+        val mondayday = ArrayList<String>()
+        val tuesdayday = ArrayList<String>()
+        val wednesdayday = ArrayList<String>()
+        val thursdayday = ArrayList<String>()
+        val fridayday = ArrayList<String>()
+        val saturdayday = ArrayList<String>()
+        for (i in 0..7)
+        {
+            if (!monday?.get(i).equals(" ")) mondayday.add("${i+1}. "+monday?.get(i))
+            if (!tuesday?.get(i).equals(" ")) tuesdayday.add("${i+1}. "+tuesday?.get(i))
+            if (!wednesday?.get(i).equals(" ")) wednesdayday.add("${i+1}. "+wednesday?.get(i))
+            if (!thursday?.get(i).equals(" ")) thursdayday.add("${i+1}. "+thursday?.get(i))
+            if (!friday?.get(i).equals(" ")) fridayday.add("${i+1}. "+friday?.get(i))
+            if (!saturday?.get(i).equals(" ")) saturdayday.add("${i+1}. "+saturday?.get(i))
+        }
 
-        val personList0 = ArrayList<String>()
-        val personList1 = ArrayList<String>()
-        val personList2 = ArrayList<String>()
-        val personList3 = ArrayList<String>()
-        val personList4 = ArrayList<String>()
-        val personList5 = ArrayList<String>()
-        personList0.add(vstup!!)
-         personList0.add("Математика")
-            personList0.add("Математика")
-            personList0.add("Математика")
-            personList0.add("Математика")
-            personList0.add("Математика")
-            personList1.add("Русский язык")
-            personList1.add("Русский язык")
-            personList1.add("Русский язык")
-            personList1.add("Русский язык")
-            personList1.add("Русский язык")
-            personList1.add("Русский язык")
-            personList2.add("Химия")
-            personList2.add("Химия")
-            personList2.add("Химия")
-            personList2.add("Химия")
-            personList2.add("Химия")
-            personList2.add("Химия")
-            personList3.add("Биология")
-            personList3.add("Биология")
-            personList3.add("Биология")
-            personList3.add("Биология")
-            personList3.add("Биология")
-            personList3.add("Биология")
-            personList4.add("Физкультура")
-            personList4.add("Физкультура")
-            personList4.add("Физкультура")
-            personList4.add("Физкультура")
-            personList4.add("Физкультура")
-            personList4.add("Физкультура")
-            personList5.add("Математика")
-            personList5.add("Информатика")
-            personList5.add("Информатика")
-            personList5.add("Информатика")
-            personList5.add("Информатика")
-            personList5.add("Информатика")
-            val personList = arrayListOf<ArrayList<String>>()
-            personList.add(personList0)
-            personList.add(personList1)
-            personList.add(personList2)
-            personList.add(personList3)
-            personList.add(personList4)
-            personList.add(personList5)
+        val days = arrayListOf<ArrayList<String>>()
+        days.add(mondayday)
+        days.add(tuesdayday)
+        days.add(wednesdayday)
+        days.add(thursdayday)
+        days.add(fridayday)
+        days.add(saturdayday)
         tabs.setupWithViewPager(viewPager)
-        val adapter: PagerAdapter = SectionsPagerAdapter(this.requireActivity(), personList)
+        val adapter: PagerAdapter = SectionsPagerAdapter(this.requireActivity(), days)
         viewPager.adapter = adapter
         viewPager.currentItem = 0
         return root
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
 
     override fun onDestroyView() {
 

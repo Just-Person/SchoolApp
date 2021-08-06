@@ -37,12 +37,14 @@ import com.example.myschool.ui.gallery.GalleryFragmentDirections
 import com.example.myschool.ui.home.HomeFragmentArgs
 import com.example.myschool.ui.home.HomeFragmentDirections
 import com.example.myschool.ui.slideshow.SlideshowFragment
+import com.google.firebase.database.*
 
 
-class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MenuActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMenuBinding
-
+    lateinit var db: FirebaseDatabase
+    lateinit var table: DatabaseReference
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,49 +54,72 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMenu.toolbar)
-        val bundle = Bundle()
-        bundle.putString("gallery1", "Programming")
-        val home = HomeFragment()
-        val gallery = GalleryFragment()
-        // val action =
-        //supportFragmentManager.beginTransaction().replace(R.id.fragment_container_view_tag,home).commit()
-        //home.arguments = bundle
-
-        //gallery.arguments =  bundle
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val nameArg = NavArgument.Builder().setDefaultValue("Программирование").build()
-        // val nameArg1 = NavArgument.Builder().setDefaultValue("Галерея").build()
+        val userID = intent.extras?.getString("userID")
+       val monday = intent.extras?.getStringArrayList("monday")
+        val tuesday = intent.extras?.getStringArrayList("tuesday")
+        val wednesday = intent.extras?.getStringArrayList("wednesday")
+        val thursday = intent.extras?.getStringArrayList("thursday")
+        val friday = intent.extras?.getStringArrayList("friday")
+        val saturday = intent.extras?.getStringArrayList("saturday")
+        val nameArgmonday = NavArgument.Builder().setDefaultValue(monday).build()
+        val nameArgtuesday = NavArgument.Builder().setDefaultValue(tuesday).build()
+        val nameArgwednesday = NavArgument.Builder().setDefaultValue(wednesday).build()
+        val nameArgthursday = NavArgument.Builder().setDefaultValue(thursday).build()
+        val nameArgfriday = NavArgument.Builder().setDefaultValue(friday).build()
+        val nameArgsaturday = NavArgument.Builder().setDefaultValue(saturday).build()
         val navInflater = navController.navInflater
         val navGraph = navInflater.inflate(R.navigation.mobile_navigation)
-        navGraph.addArgument("home1", nameArg);
-        navGraph.addArgument("gallery1", nameArg);
-        navGraph.addArgument("slideshow1", nameArg);
+        navGraph.addArgument("monday", nameArgmonday);
+        navGraph.addArgument("tuesday", nameArgtuesday);
+        navGraph.addArgument("wednesday", nameArgwednesday);
+        navGraph.addArgument("thursday", nameArgthursday);
+        navGraph.addArgument("friday", nameArgfriday);
+        navGraph.addArgument("saturday", nameArgsaturday);
         println(navGraph.arguments.values)
-        //  navGraph.addArgument("gallery", nameArg1);
         navController.graph = navGraph;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
             ), drawerLayout
         )
-        val bundle1: Bundle = Bundle()
-        bundle1.putString("home1","Programming")
-        val homeFragment = HomeFragment()
-        homeFragment.arguments = bundle1
+
 navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
-
     navController.graph.findNode(R.id.nav_home)?.addArgument(
-        "home1", NavArgument.Builder()
-            .setDefaultValue("Programming")
+        "monday", NavArgument.Builder()
+            .setDefaultValue(monday)
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_home)?.addArgument(
+        "tuesday", NavArgument.Builder()
+            .setDefaultValue(tuesday)
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_home)?.addArgument(
+        "wednesday", NavArgument.Builder()
+            .setDefaultValue(wednesday)
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_home)?.addArgument(
+        "thursday", NavArgument.Builder()
+            .setDefaultValue(thursday)
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_home)?.addArgument(
+        "friday", NavArgument.Builder()
+            .setDefaultValue(friday)
+            .build()
+    )
+    navController.graph.findNode(R.id.nav_home)?.addArgument(
+        "saturday", NavArgument.Builder()
+            .setDefaultValue(saturday)
             .build()
     )
     navController.graph.findNode(R.id.nav_gallery)?.addArgument(
-        "gallery1", NavArgument.Builder()
+        "gallery2", NavArgument.Builder()
             .setDefaultValue("Programming")
             .build()
     )
@@ -107,39 +132,10 @@ navController.addOnDestinationChangedListener { controller, destination, argumen
 
 }
 
-        /*when (destination.id){
-            R.id.nav_home->{
-
-                navController.graph.findNode(R.id.nav_home)?.addArgument(
-                    "home1", NavArgument.Builder()
-                        .setDefaultValue("Programming")
-                        .build()
-                )
-            }
-            R.id.nav_gallery->{
-
-                navController.graph.findNode(R.id.nav_home)?.addArgument(
-                    "gallery1", NavArgument.Builder()
-                        .setDefaultValue("Programming")
-                        .build()
-                )
-
-            }
-            R.id.nav_slideshow->{
-
-                //navGraph.addArgument("slideshow1", nameArg);
-                arguments?.putString("slideshow1","Programming")
-            }
-        }*/
-
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        /*  val sectionsPagerAdapter = SectionsPagerAdapter(this,supportFragmentManager)
-        val viewPager: ViewPager = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
-        tabs.setupWithViewPager(viewPager)*/
+
     }
 
 
@@ -155,9 +151,7 @@ navController.addOnDestinationChangedListener { controller, destination, argumen
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
-    }
+
 
 
 }

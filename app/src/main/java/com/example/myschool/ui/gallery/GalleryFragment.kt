@@ -27,11 +27,8 @@ import com.example.myschool.ui.home.HomeFragmentDirections
 
 class GalleryFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
     private var _binding: FragmentGalleryBinding? = null
 var strfromhome: String? = String()
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -39,32 +36,17 @@ var strfromhome: String? = String()
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       // val seta = HomeFragmentArgs().home1
-var lock = this.requireArguments().getString("gallery1")
-        //val bund = this.requireActivity().findNavController(requireView()).graph
-        //lock = bund?.getString("gallery1")
-
-        strfromhome = HomeFragmentArgs.fromBundle(requireArguments()).home1//.arguments?.getString("home1")
+var lock = this.requireArguments().getString("gallery2")
+        strfromhome = HomeFragmentArgs.fromBundle(requireArguments()).home1
         println("GalleryFragment strfromhome "+ lock)
         println("Home "+HomeFragmentArgs.fromBundle(requireArguments()).home1)
-            //.fromBundle(arguments).getPrivacyPolicyLink()
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
-       // val intf = arguments?.getInt("intt")
         println("GalleryFragment args " + GalleryFragmentArgs.fromBundle(requireArguments()).gallery1)
-       // val actionfromhome = HomeFragmentDirections.actionNavHomeToNavGallery().arguments
-        //val actiontohome = GalleryFragmentDirections.actionNavGalleryToNavHome(strtext!!)
-        //val actiontoslideshow = GalleryFragmentDirections.actionNavGalleryToNavSlideshow(strtext!!)
-        //actiontohome.arguments.putString("home1",strtext)
-        //actiontoslideshow.arguments.putString("slideshow1",strtext)
-        //println("GalleryFragment "+ strtext)
-        //println(actionfromhome)
         val textView: TextView = binding.textGallery
 
-        textView.text = GalleryFragmentArgs.fromBundle(requireArguments()).gallery1;
+        textView.text = lock;
         return root
     }
 
