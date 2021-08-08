@@ -4,19 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.Table.TimetableFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       >
+        android:theme="@style/TIMETABLE">
 
 
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/upper"
+            android:textAlignment="center"
+            app:tabTextAppearance="@style/TIMETABLE1"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="#262662"
+            android:hapticFeedbackEnabled="true"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

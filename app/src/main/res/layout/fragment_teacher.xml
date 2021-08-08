@@ -4,34 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.slideshow.SlideshowFragment">
+    tools:context=".ui.teacher.TeacherFragment">
 
     <ListView
-        android:id="@+id/subject"
+        android:id="@+id/subj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/teachtab"
+        android:fontFamily="@font/roboto_condensed_regular"
         android:clickable="false"
+        android:paddingLeft="15dp"
+        android:paddingRight="-20dp"
         android:divider="@color/transparent"
-        android:dividerHeight="0dp"
+        android:dividerHeight="-8sp"
         android:scrollbars="none"
+        android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:text="HELLO!"></ListView>
-
+        tools:text="HELLO!"/>
+<HorizontalScrollView
+    android:scrollbars="none"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints"
+    app:layout_constraintEnd_toEndOf="parent">
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        >
     <ListView
-        android:id="@+id/mark"
-        android:layout_width="wrap_content"
+        android:id="@+id/teach"
+        android:textSize="11sp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:background="@drawable/tablemark"
+        android:background="@drawable/authorization"
+        android:fontFamily="@font/roboto_condensed_regular"
         android:clickable="false"
         android:divider="@color/transparent"
-        android:dividerHeight="0dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/subject"
+        android:dividerHeight="-8sp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="0dp"
-        tools:text="HELLO!"></ListView>
+        android:scrollbars="none"
+        tools:text="HELLO!" />
+    </LinearLayout>
+</HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,53 +1,29 @@
-package com.example.myschool.ui.home
+package com.example.myschool.ui.Table
 
-import android.R
-import android.app.Activity
 import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.support.v4.media.session.MediaSessionCompat.Token.fromBundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.FrameLayout
-import android.widget.ListView
-import android.widget.Toast
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.findFragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgument
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
-import com.example.myschool.databinding.FragmentHomeBinding
-import com.example.myschool.ui.timetable.PageViewModel
+import com.example.myschool.databinding.FragmentTimetableBinding
 import com.example.myschool.ui.timetable.SectionsPagerAdapter
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
-import com.example.myschool.MainActivity
 
 
 import androidx.viewpager.widget.PagerAdapter
-import com.example.myschool.ui.gallery.GalleryFragment
-import com.example.myschool.ui.gallery.GalleryFragmentArgs
-import android.widget.TextView
-import android.net.http.SslCertificate.saveState
-import java.util.ResourceBundle.getBundle
 
 
-class HomeFragment : Fragment(){
+class TimetableFragment : Fragment(){
     private var monday: ArrayList<String>? = null
     private var tuesday: ArrayList<String>? = null
     private var wednesday: ArrayList<String>? = null
     private var thursday: ArrayList<String>? = null
     private var friday: ArrayList<String>? = null
     private var saturday: ArrayList<String>? = null
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentTimetableBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -58,15 +34,13 @@ class HomeFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.e(TAG, "Hello! HomeFragment is activated")
         monday = this.arguments?.getStringArrayList("monday")
         tuesday = this.arguments?.getStringArrayList("tuesday")
         wednesday = this.arguments?.getStringArrayList("wednesday")
         thursday = this.arguments?.getStringArrayList("thursday")
         friday = this.arguments?.getStringArrayList("friday")
         saturday = this.arguments?.getStringArrayList("saturday")
-        println("HomeFragment " + monday)
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentTimetableBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val viewPager: ViewPager = binding.viewPager
         val tabs: TabLayout =binding.tabs
@@ -103,7 +77,6 @@ class HomeFragment : Fragment(){
 
     override fun onDestroyView() {
 
-        Log.e(TAG, "Hello! HomeFragment is destroyed")
         super.onDestroyView()
         _binding = null
     }

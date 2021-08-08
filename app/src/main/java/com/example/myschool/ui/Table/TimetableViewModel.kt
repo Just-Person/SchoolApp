@@ -1,8 +1,8 @@
-package com.example.myschool.ui.home
+package com.example.myschool.ui.Table
 
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class TimetableViewModel : ViewModel() {
 
 
     /*private val _text = MutableLiveData<String>().apply {

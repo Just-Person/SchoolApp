@@ -1,19 +1,11 @@
 package com.example.myschool
 
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.util.AttributeSet
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
-import android.view.SurfaceControl
-import android.view.View
-import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -21,22 +13,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.core.view.GravityCompat
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.*
-import androidx.viewpager.widget.ViewPager
 import com.example.myschool.databinding.ActivityMenuBinding
-import com.example.myschool.ui.gallery.GalleryFragment
-import com.example.myschool.ui.home.HomeFragment
-import com.example.myschool.ui.timetable.SectionsPagerAdapter
-import com.google.android.material.tabs.TabLayout
-import androidx.navigation.fragment.NavHostFragment
-import com.example.myschool.ui.gallery.GalleryFragmentArgs
-import com.example.myschool.ui.gallery.GalleryFragmentDirections
-import com.example.myschool.ui.home.HomeFragmentArgs
-import com.example.myschool.ui.home.HomeFragmentDirections
-import com.example.myschool.ui.slideshow.SlideshowFragment
 import com.google.firebase.database.*
 
 
@@ -85,58 +63,58 @@ class MenuActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_timetable, R.id.nav_mark, R.id.nav_teacher
             ), drawerLayout
         )
 
 navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
-    navController.graph.findNode(R.id.nav_home)?.addArgument(
+    navController.graph.findNode(R.id.nav_timetable)?.addArgument(
         "monday", NavArgument.Builder()
             .setDefaultValue(monday)
             .build()
     )
-    navController.graph.findNode(R.id.nav_home)?.addArgument(
+    navController.graph.findNode(R.id.nav_timetable)?.addArgument(
         "tuesday", NavArgument.Builder()
             .setDefaultValue(tuesday)
             .build()
     )
-    navController.graph.findNode(R.id.nav_home)?.addArgument(
+    navController.graph.findNode(R.id.nav_timetable)?.addArgument(
         "wednesday", NavArgument.Builder()
             .setDefaultValue(wednesday)
             .build()
     )
-    navController.graph.findNode(R.id.nav_home)?.addArgument(
+    navController.graph.findNode(R.id.nav_timetable)?.addArgument(
         "thursday", NavArgument.Builder()
             .setDefaultValue(thursday)
             .build()
     )
-    navController.graph.findNode(R.id.nav_home)?.addArgument(
+    navController.graph.findNode(R.id.nav_timetable)?.addArgument(
         "friday", NavArgument.Builder()
             .setDefaultValue(friday)
             .build()
     )
-    navController.graph.findNode(R.id.nav_home)?.addArgument(
+    navController.graph.findNode(R.id.nav_timetable)?.addArgument(
         "saturday", NavArgument.Builder()
             .setDefaultValue(saturday)
             .build()
     )
-    navController.graph.findNode(R.id.nav_gallery)?.addArgument(
+    navController.graph.findNode(R.id.nav_teacher)?.addArgument(
         "teachersthings", NavArgument.Builder()
             .setDefaultValue(teachersthings)
             .build()
     )
-    navController.graph.findNode(R.id.nav_gallery)?.addArgument(
+    navController.graph.findNode(R.id.nav_teacher)?.addArgument(
         "teachersname", NavArgument.Builder()
             .setDefaultValue(teachersname)
             .build()
     )
-    navController.graph.findNode(R.id.nav_slideshow)?.addArgument(
+    navController.graph.findNode(R.id.nav_mark)?.addArgument(
         "teachersthings", NavArgument.Builder()
             .setDefaultValue(teachersthings)
             .build()
     )
-    navController.graph.findNode(R.id.nav_slideshow)?.addArgument(
+    navController.graph.findNode(R.id.nav_mark)?.addArgument(
         "marks", NavArgument.Builder()
             .setDefaultValue(marks)
             .build()
@@ -152,11 +130,7 @@ navController.addOnDestinationChangedListener { controller, destination, argumen
 
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)

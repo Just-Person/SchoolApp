@@ -36,7 +36,8 @@ data class User (
     private  var kl:String = "",
     private  var letter:String = "",
     private var name: String = "",
-    private var surname: String = ""
+    private var surname: String = "",
+private var fields: ArrayList<String> = arrayListOf(kl,letter,name)
 ) {
 
     fun getName(): String? {
